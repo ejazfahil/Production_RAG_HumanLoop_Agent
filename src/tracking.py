@@ -1,4 +1,4 @@
-"""Cost and latency tracking. 2026-06-09"""
+"""Cost and latency tracking. 2026-06-02"""
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import List
@@ -28,5 +28,3 @@ class QueryTracker:
     def total_cost(self): return sum(r.cost_usd for r in self.records)
     @property
     def avg_latency_ms(self): return sum(r.latency_ms for r in self.records)/len(self.records) if self.records else 0
-
-# ts:2026-06-09T09:15:00
