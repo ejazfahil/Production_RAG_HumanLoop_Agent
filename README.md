@@ -2,6 +2,8 @@
 
 A production-grade Retrieval-Augmented Generation (RAG) system for industrial document intelligence, featuring stateful human-in-the-loop approval gates, complete auditability, and extensive observability. Built with **LangGraph** for orchestration, **pgvector** for semantic search, and **Prometheus/Grafana** for metrics and telemetry.
 
+![Production RAG + Human-in-the-Loop Architecture Diagram & Poster](docs/architecture_poster.png)
+
 ---
 
 ## 🎯 Aim
@@ -46,7 +48,7 @@ graph LR
     Ground -->|Grounded| HITL["HITL Approval<br/>(interrupt)"]
     Ground -->|Not Grounded| Abstain
     HITL -->|API /approvals POST| Review["Human Reviewer"]
-    Review -->|approve|edit|reject| Finalize["Finalize Response"]
+    Review -->|"approve / edit / reject"| Finalize["Finalize Response"]
     Finalize --> Respond["Return Answer"]
     Abstain --> Respond
     Respond --> Metrics["Prometheus Metrics<br/>(cost, latency, tokens)"]
