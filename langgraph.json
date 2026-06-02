@@ -1,0 +1,15 @@
+{
+  "dependencies": [
+    "langchain_core",
+    "langgraph",
+    "fastapi",
+    "pydantic",
+    "pydantic-settings",
+    "structlog",
+    "prometheus_client"
+  ],
+  "graphs": {
+    "agent": "prag.graph:graph"
+  },
+  "env": "./.env"
+}

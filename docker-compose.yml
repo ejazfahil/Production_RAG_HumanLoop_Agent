@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16-latest
+    environment:
+      POSTGRES_USER: prag
+      POSTGRES_PASSWORD: prag
+      POSTGRES_DB: prag
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U prag -d prag"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ENVIRONMENT: production
+      LOG_LEVEL: INFO
+      LLM_PROVIDER: fake
+      EMBEDDING_PROVIDER: fake
+      VECTOR_BACKEND: pgvector
+      CHECKPOINTER: postgres
+      DATABASE_URL: postgresql://prag:prag@postgres:5432/prag
+      LANGSMITH_TRACING: "false"
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
