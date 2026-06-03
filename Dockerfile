@@ -3,7 +3,11 @@ FROM python:3.12-slim as builder
 WORKDIR /build
 RUN apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*
 
-COPY pyproject.toml .
+# Copy the files the build backend needs to generate package metadata and the
+# wheel: pyproject.toml, the README referenced by [project.readme], and the
+# source tree under src/ (hatchling builds the `prag` package from src/prag).
+COPY pyproject.toml README.md ./
+COPY src ./src
 RUN python -m venv /opt/venv && \
     /opt/venv/bin/pip install --upgrade pip setuptools wheel && \
     /opt/venv/bin/pip install --no-cache-dir .
