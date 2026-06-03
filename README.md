@@ -1,5 +1,7 @@
 # Production RAG + Human-in-the-Loop Agent
 
+[![CI](https://github.com/ejazfahil/Production_RAG_HumanLoop_Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/ejazfahil/Production_RAG_HumanLoop_Agent/actions/workflows/ci.yml)
+
 A production-grade Retrieval-Augmented Generation (RAG) system for industrial document intelligence, featuring stateful human-in-the-loop approval gates, complete auditability, and extensive observability. Built with **LangGraph** for orchestration, **pgvector** for semantic search, and **Prometheus/Grafana** for metrics and telemetry.
 
 ![Production RAG + Human-in-the-Loop Architecture Diagram & Poster](docs/architecture_poster.png)
