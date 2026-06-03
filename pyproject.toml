@@ -70,7 +70,10 @@ module = [
     "pypdf.*",
     "psycopg.*",
     "langgraph.checkpoint.postgres.*",
+    "langgraph.checkpoint.sqlite.*",
     "opentelemetry.*",
+    "prometheus_client.*",
+    "structlog.*",
 ]
 ignore_missing_imports = true
 
