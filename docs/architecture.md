@@ -11,3 +11,5 @@
 - LangGraph for stateful, resumable agent
 - pgvector over Pinecone (self-hosted, no vendor lock-in)
 - HITL timeout: 300s → auto-reject
+
+# ts:2026-06-09T17:45:00
