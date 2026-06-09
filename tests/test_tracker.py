@@ -1,4 +1,4 @@
-"""Tracker tests. 2026-06-02"""
+"""Tracker tests. 2026-06-09"""
 import sys,os; sys.path.insert(0,os.path.join(os.path.dirname(__file__),".."))  
 from src.tracking import QueryRecord, QueryTracker
 
@@ -17,5 +17,3 @@ def test_hitl_gate():
     assert (answer if approved else None)==answer
     approved=False
     assert (answer if approved else None) is None
-
-# ts:2026-06-02T14:00:00
