@@ -48,6 +48,24 @@ python ingest.py --docs ./docs/sample_manual.pdf
 python agent.py --query "What is the rated voltage of meter model X42?"
 ```
 
+### 🔌 Run fully offline with a local LLM (Ollama)
+
+The generation provider is OpenAI-compatible and swappable via a single env var, so
+the agent runs with **no external API, no API key, and zero per-token cost** — every
+request stays on the machine (useful for GDPR / on-prem document data). Point it at a
+host [Ollama](https://ollama.com) server:
+
+```yaml
+# docker-compose.yml (app service)
+LLM_PROVIDER: openai
+LLM_MODEL: qwen3:8b                              # or llama3.2:3b for lower latency
+LLM_API_KEY: ollama                              # placeholder; Ollama ignores it
+LLM_BASE_URL: http://host.docker.internal:11434/v1
+```
+
+Verified end-to-end against `qwen3:8b` from inside the container. Switching back to a
+hosted provider is just `LLM_PROVIDER`/`LLM_MODEL`/`LLM_BASE_URL` — no code changes.
+
 ## ⚙️ Configuration
 
 | Variable | Description | Default |

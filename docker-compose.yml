@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   postgres:
-    image: pgvector/pgvector:pg16-latest
+    image: pgvector/pgvector:pg16
     environment:
       POSTGRES_USER: prag
       POSTGRES_PASSWORD: prag
@@ -25,7 +25,13 @@ services:
     environment:
       ENVIRONMENT: production
       LOG_LEVEL: INFO
-      LLM_PROVIDER: fake
+      # Local LLM via host Ollama (OpenAI-compatible endpoint). host.docker.internal
+      # resolves to the macOS host from inside the container.
+      LLM_PROVIDER: openai
+      LLM_MODEL: qwen3:8b
+      LLM_API_KEY: ollama
+      LLM_BASE_URL: http://host.docker.internal:11434/v1
+      # Only the "fake" embedder is implemented in this repo; keep it for retrieval.
       EMBEDDING_PROVIDER: fake
       VECTOR_BACKEND: pgvector
       CHECKPOINTER: postgres
@@ -34,7 +40,7 @@ services:
     ports:
       - "8000:8000"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health').status==200 else 1)"]
       interval: 30s
       timeout: 10s
       retries: 3
