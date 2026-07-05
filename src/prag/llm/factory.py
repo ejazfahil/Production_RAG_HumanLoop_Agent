@@ -52,6 +52,10 @@ def build_llm(settings: Settings) -> FakeLLM | OpenAICompatLLM:
     """Return the configured chat LLM."""
     if settings.llm_provider == "fake":
         return FakeLLM(model=settings.llm_model)
+    if settings.llm_provider == "ollama":
+        from prag.llm.ollama import OllamaLLM
+
+        return OllamaLLM(model=settings.llm_model, host=settings.ollama_host)
     if settings.llm_provider in ("openai", "mistral"):
         if not settings.llm_api_key:
             raise ValueError(f"llm_api_key required for provider '{settings.llm_provider}'")
@@ -65,8 +69,14 @@ def build_llm(settings: Settings) -> FakeLLM | OpenAICompatLLM:
 
 
 def build_embedder(settings: Settings) -> Embedder:
-    """Return the configured embedder. Fake is the offline default."""
+    """Return the configured embedder. Fake is the offline default; Ollama is a real,
+    free, local embedder (e.g. nomic-embed-text)."""
     if settings.embedding_provider == "fake":
         return FakeEmbedder(model=settings.embedding_model, dim=settings.embedding_dim)
-    # Real embedding providers slot in here; they must satisfy the Embedder protocol.
+    if settings.embedding_provider == "ollama":
+        from prag.llm.ollama import OllamaEmbedder
+
+        return OllamaEmbedder(model=settings.embedding_model, host=settings.ollama_host,
+                              dim=settings.embedding_dim)
+    # Other real embedding providers slot in here; they must satisfy the Embedder protocol.
     raise NotImplementedError(f"Embedding provider '{settings.embedding_provider}' not wired yet")

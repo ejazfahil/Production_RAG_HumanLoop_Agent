@@ -19,12 +19,13 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     log_json: bool = True
 
-    # --- LLM provider (provider-agnostic; "fake" needs no API key) ---
-    llm_provider: Literal["fake", "openai", "anthropic", "mistral"] = "fake"
+    # --- LLM provider (provider-agnostic; "fake" needs no API key, "ollama" is free/local) ---
+    llm_provider: Literal["fake", "ollama", "openai", "anthropic", "mistral"] = "fake"
     llm_model: str = "fake-small"
     llm_api_key: str | None = None
     llm_base_url: str | None = None  # e.g. Mistral / Azure / self-hosted vLLM
-    embedding_provider: Literal["fake", "openai", "mistral"] = "fake"
+    ollama_host: str = "http://localhost:11434"  # for llm/embedding_provider == "ollama"
+    embedding_provider: Literal["fake", "ollama", "openai", "mistral"] = "fake"
     embedding_model: str = "fake-embed"
     embedding_dim: int = 384
 

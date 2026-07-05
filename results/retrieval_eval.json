@@ -1,0 +1,142 @@
+{
+  "corpus": [
+    "meter_spec_acme_x200.md",
+    "maintenance_manual_excerpt.md"
+  ],
+  "queries": 8,
+  "top_k": 4,
+  "results": [
+    {
+      "embedder": "fake/fake-embed",
+      "n": 8,
+      "hit@1": 0.5,
+      "hit@k": 1.0,
+      "mean_top1_score": 0.452,
+      "seconds": 0.0,
+      "per_query": [
+        {
+          "query": "What is the measurement accuracy class of the meter?",
+          "expected": "meter_spec_acme_x200.md",
+          "top_source": "maintenance_manual_excerpt.md",
+          "top1_score": 0.577,
+          "hit@1": 0
+        },
+        {
+          "query": "What is the maximum current the meter can handle?",
+          "expected": "meter_spec_acme_x200.md",
+          "top_source": "maintenance_manual_excerpt.md",
+          "top1_score": 0.577,
+          "hit@1": 0
+        },
+        {
+          "query": "What supply voltage does the device run on?",
+          "expected": "meter_spec_acme_x200.md",
+          "top_source": "maintenance_manual_excerpt.md",
+          "top1_score": 0.316,
+          "hit@1": 0
+        },
+        {
+          "query": "What is the rated reference current?",
+          "expected": "meter_spec_acme_x200.md",
+          "top_source": "maintenance_manual_excerpt.md",
+          "top1_score": 0.416,
+          "hit@1": 0
+        },
+        {
+          "query": "How long does the backup battery last before replacement?",
+          "expected": "maintenance_manual_excerpt.md",
+          "top_source": "maintenance_manual_excerpt.md",
+          "top1_score": 0.34,
+          "hit@1": 1
+        },
+        {
+          "query": "Why might the meter fail to respond over the serial connection?",
+          "expected": "maintenance_manual_excerpt.md",
+          "top_source": "maintenance_manual_excerpt.md",
+          "top1_score": 0.46,
+          "hit@1": 1
+        },
+        {
+          "query": "What should a technician do if the terminal cover seal is broken?",
+          "expected": "maintenance_manual_excerpt.md",
+          "top_source": "maintenance_manual_excerpt.md",
+          "top1_score": 0.434,
+          "hit@1": 1
+        },
+        {
+          "query": "What is the default communication speed?",
+          "expected": "maintenance_manual_excerpt.md",
+          "top_source": "maintenance_manual_excerpt.md",
+          "top1_score": 0.495,
+          "hit@1": 1
+        }
+      ]
+    },
+    {
+      "embedder": "ollama/nomic-embed-text",
+      "n": 8,
+      "hit@1": 0.875,
+      "hit@k": 1.0,
+      "mean_top1_score": 0.64,
+      "seconds": 0.1,
+      "per_query": [
+        {
+          "query": "What is the measurement accuracy class of the meter?",
+          "expected": "meter_spec_acme_x200.md",
+          "top_source": "meter_spec_acme_x200.md",
+          "top1_score": 0.655,
+          "hit@1": 1
+        },
+        {
+          "query": "What is the maximum current the meter can handle?",
+          "expected": "meter_spec_acme_x200.md",
+          "top_source": "meter_spec_acme_x200.md",
+          "top1_score": 0.701,
+          "hit@1": 1
+        },
+        {
+          "query": "What supply voltage does the device run on?",
+          "expected": "meter_spec_acme_x200.md",
+          "top_source": "meter_spec_acme_x200.md",
+          "top1_score": 0.589,
+          "hit@1": 1
+        },
+        {
+          "query": "What is the rated reference current?",
+          "expected": "meter_spec_acme_x200.md",
+          "top_source": "meter_spec_acme_x200.md",
+          "top1_score": 0.601,
+          "hit@1": 1
+        },
+        {
+          "query": "How long does the backup battery last before replacement?",
+          "expected": "maintenance_manual_excerpt.md",
+          "top_source": "maintenance_manual_excerpt.md",
+          "top1_score": 0.631,
+          "hit@1": 1
+        },
+        {
+          "query": "Why might the meter fail to respond over the serial connection?",
+          "expected": "maintenance_manual_excerpt.md",
+          "top_source": "maintenance_manual_excerpt.md",
+          "top1_score": 0.679,
+          "hit@1": 1
+        },
+        {
+          "query": "What should a technician do if the terminal cover seal is broken?",
+          "expected": "maintenance_manual_excerpt.md",
+          "top_source": "maintenance_manual_excerpt.md",
+          "top1_score": 0.663,
+          "hit@1": 1
+        },
+        {
+          "query": "What is the default communication speed?",
+          "expected": "maintenance_manual_excerpt.md",
+          "top_source": "meter_spec_acme_x200.md",
+          "top1_score": 0.599,
+          "hit@1": 0
+        }
+      ]
+    }
+  ]
+}
